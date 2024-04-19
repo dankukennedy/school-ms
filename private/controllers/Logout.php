@@ -1,6 +1,6 @@
 <?php 
 
-// home controller
+// logout controller
 class Logout extends Controller
 {
 
