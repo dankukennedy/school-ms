@@ -87,7 +87,13 @@ class User extends Model
    
    public function make_user_id($data)
      {
-        $data['user_id'] = random_string(60);
+        //$data['user_id'] = random_string(60);
+        $data['user_id'] = strtolower($data['firstname'] . "." . $data['lastname']);
+
+        while($this->where('user_id',$data['user_id']))
+        {
+         $data['user_id'] .= rand(10,9999);
+        }
         return $data;
      }
 
@@ -106,7 +112,7 @@ class User extends Model
         return $data;
     }
 
-    private function random_string($lenght)
+    /**private function random_string($lenght)
     {
         $array = array(0,1,2,3,4,5,6,7,8,9,'a','b','c','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
         $text = "";
@@ -117,6 +123,7 @@ class User extends Model
          }
 
         return $text;
-    }
+    }**/
+    
 
 }

@@ -2,16 +2,17 @@
 
 // School Model
 
-class School extends Model
+class Classes_model extends Model
 {
-
+    protected $table = 'classes';
     protected $allowedColumns = [
-        'school',
+        'class',
         'date',
     ];
 
     protected $beforeInsert = [
         'make_school_id',
+        'make_class_id',
         'make_user_id', 
     ];
 
@@ -26,9 +27,9 @@ class School extends Model
         $this->errors = array();
 
         //check for first name
-        if(empty($DATA['school']) || !preg_match('/^[a-zA-Z]+$/', $DATA['school']))
+        if(empty($DATA['class']) || !preg_match('/^[a-z A-Z0-9]+$/', $DATA['class']))
          {
-            $this->errors['school'] = "Only letters allows in the school name";
+            $this->errors['class'] = "Only letters and numbers are allows in the class name";
          }        
         
          if(count($this->errors) == 0)
@@ -38,6 +39,15 @@ class School extends Model
        return false;
     }
    
+   public function make_school_id($data)
+     {
+        if(isset($_SESSION['USER']->school_id))
+        {
+            $data['school_id'] = $_SESSION['USER']->school_id;
+        }
+        return $data;
+     }
+
    public function make_user_id($data)
      {
         if(isset($_SESSION['USER']->user_id))
@@ -47,9 +57,9 @@ class School extends Model
         return $data;
      }
 
-    public function make_school_id($data)
+    public function make_class_id($data)
      { 
-       $data['school_id'] = random_string(60);
+       $data['class_id'] = random_string(60);
         return $data;
      }
 

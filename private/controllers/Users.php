@@ -12,10 +12,19 @@ class Users extends Controller
 		 }
 		 
          $user = new User();
-
-		 $data = $user->findAll();
+         
+		 $user = new User();
+		 $school_id = Auth::getSchool_id();
+		 $data = $user->query("select * from users where school_id = :school_id && rank not in ('student') order by id desc " ,['school_id'=>$school_id ]);
 		 
-		 $this->view('users',['rows'=>$data]);
+		 $crumbs[]= ['Dashboard',''];
+		 $crumbs[]= ['staff','staff'];
+
+		 $this->view('users',[
+			'rows'=>$data,
+			'crumbs'=>$crumbs,	
+			
+		]);
 	}
 }
 

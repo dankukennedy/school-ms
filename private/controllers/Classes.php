@@ -1,24 +1,26 @@
 <?php 
 
-// schools controller
-class Schools extends Controller
+
+
+// Classes controller
+class Classes extends Controller
 {
 
 	public function index(){
 
-		if(!Auth::logged_in())
+		if(!Auth::logged_in()) 
 		 {
             $this->redirect('login');
 		 }
 		 
-         $school = new School();
+         $classes = new Classes_model();
 
-		 $data = $school->findAll();
+		 $data = $classes->findAll('desc');
 
 		 $crumbs[]= ['Dashboard',''];
-		 $crumbs[]= ['Schools','schools'];
+		 $crumbs[]= ['Classes','classes'];
 
-		 $this->view('schools',[
+		 $this->view('classes',[
 			'crumbs'=> $crumbs,	
 			'rows'=>$data,
 			
@@ -38,27 +40,27 @@ class Schools extends Controller
         if(count($_POST) > 0)
 		{ 
 
-          $school = new School();
-		  if( $school->validate($_POST))
+          $classes = new Classes_model();
+		  if( $classes->validate($_POST))
 			 {
 				
 				$_POST['date'] = date("Y-m-d H:i:s");
 
-				$school->insert($_POST); 
-                $this->redirect('schools');
+				$classes->insert($_POST); 
+                $this->redirect('classes');
 
 			 } else
 			   {
 				//errors
-				 $errors =  $school->errors;
+				 $errors =  $classes->errors;
 			   }
 
 		}
 		  $crumbs[]= ['Dashboard',''];
-		  $crumbs[]= ['Schools','schools'];
-		  $crumbs[]= ['Add','schools/add'];
+		  $crumbs[]= ['Classes','classes'];
+		  $crumbs[]= ['Add','classes/add'];
 
-		 $this->view('schools.add',[
+		 $this->view('classes.add',[
 			'errors'=>$errors,		
 			'crumbs'=> $crumbs,		
 		 
@@ -73,33 +75,33 @@ class Schools extends Controller
             $this->redirect('login');
 		 }
  
-         $school = new School();  
+         $classes = new Classes_model();  
 
 		 $errors = array();
            
         if(count($_POST) > 0)
 		{ 
 
-		  if( $school->validate($_POST))
+		  if( $classes->validate($_POST))
 			 {
 
-				$school->update($id,$_POST); 
-                $this->redirect('schools');
+				$classes->update($id,$_POST); 
+                $this->redirect('classes');
 
 			 } else
 			   {
 				//errors
-				 $errors =  $school->errors;
+				 $errors =  $classes->errors;
 			   }
 
 		}
-		 $row = $school->where('id',$id);
+		 $row = $classes->where('id',$id);
 
 		 $crumbs[]= ['Dashboard',''];
-		  $crumbs[]= ['Schools','schools'];
-		  $crumbs[]= ['Edit','schools/edit'];
+		  $crumbs[]= ['Classes','classes'];
+		  $crumbs[]= ['Edit','classes/edit'];
 
-		 $this->view('schools.edit',[
+		 $this->view('classes.edit',[
 			'row'=>$row,		
 			'errors'=>$errors,
 			'crumbs'=> $crumbs,			
@@ -116,22 +118,22 @@ class Schools extends Controller
             $this->redirect('login');
 		 }
  
-         $school = new School();  
+         $classes = new Classes_model();  
 
 		 $errors = array();
            
         if(count($_POST) > 0)
 		{ 
-			$school->delete($id,); 
-            $this->redirect('schools');
+			$classes->delete($id,); 
+            $this->redirect('classes');
 
 		}
-		 $row = $school->where('id',$id);
+		 $row = $classes->where('id',$id);
 		
 		 $crumbs[]= ['Dashboard',''];
-		 $crumbs[]= ['Schools','schools'];
-		 $crumbs[]= ['Delete','schools/delete'];
-		 $this->view('schools.delete',[
+		 $crumbs[]= ['Classes','classes'];
+		 $crumbs[]= ['Delete','classes/delete'];
+		 $this->view('classes.delete',[
 			'row'=>$row,
 			'crumbs'=> $crumbs,	
 		 

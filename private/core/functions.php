@@ -1,12 +1,12 @@
 <?php
 
-function get_var($key)
+function get_var($key,$default = "")
  {
     if(isset($_POST[$key]))
       {
         return $_POST[$key];
       }
-      return "";
+      return $default;
  } 
 function get_select($key, $value)
  {
@@ -30,9 +30,33 @@ function esc($var)
      $text = "";
      for($x = 0; $x < $lenght; $x++) 
       {
-         $random = rand(0,61);
+         $random = rand(0,60);
          $text .= $array[$random];
       }
 
      return $text;
+ }
+function get_date($date)
+{
+  return date("jS M, Y",strtotime($date));
+} 
+
+function show($data)
+ { 
+   echo "<pre>";
+    print_r($data);
+   echo "</pre>";
+ }
+
+ function get_image($image,$gender='male')
+ { 
+    if(!file_exists($image)) {
+      $image = ASSETS.'/female.jpg';
+
+      if($gender == 'male'){
+        $image = ASSETS.'/male.jpg';
+      }
+
+    }
+    return $image;
  }

@@ -4,9 +4,22 @@
 class Profile extends Controller
 {
 
-	function index(){
+	function index($id = ''){
+         
+        $user = new User();
+		$row = $user->first('user_id',$id);
 
-		 $this->view('profile');
+		$crumbs[]= ['Dashboard',''];
+		$crumbs[]= ['profile','profile'];
+		
+		 if($row){
+			$crumbs[]= [$row->firstname,'profile'];
+		 }
+		$this->view('profile',[
+			'row' => $row,
+			'crumbs' => $crumbs,
+		]);
+
 	}
 }
 

@@ -14,7 +14,7 @@
                           <input type="text" class="form-control" placeholder="Search" aria-describedy="basic-addon1">                 
                     </div>
                 </form>
-                 <a href="<?=ROOT?>/signup">
+                 <a href="<?=ROOT?>/signup?mode=students">
                   <button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add New</button>
                  </a>
           </nav> 
@@ -42,7 +42,7 @@
            </div>             
             <?php endforeach; ?>
             <?php else:?>
-              <h4> No Staff Members ware found at this time<h4>
+              <h4> No Studets ware found at this time<h4>
             <?php endif; ?>
     </div>
       

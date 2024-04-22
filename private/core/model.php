@@ -18,15 +18,61 @@ class Model extends Database{
      {
         $column = addslashes($column);
         $query = "select * from $this->table where $column = :value";
-        return $this->query($query,[
+        $data = $this->query($query,[
             'value'=>$value
         ]);
+         // run functions after select
+       if(is_array($data)){
+         if(property_exists($this,'afterSelect'))
+         {         
+            foreach($this->afterSelect as $func )
+            {
+               $data = $this->$func($data);
+            }
+         }
+       }
+    return $data;
      } 
 
-   public function findAll()
+     public function first($column,$value)
      {
-        $query = "select * from $this->table ";
-        return $this->query($query);
+        $column = addslashes($column);
+        $query = "select * from $this->table where $column = :value";
+        $data = $this->query($query,[
+            'value'=>$value
+        ]);
+         // run functions after select
+       if(is_array($data)){
+         if(property_exists($this,'afterSelect'))
+         {         
+            foreach($this->afterSelect as $func )
+            {
+               $data = $this->$func($data);
+            }
+         }
+       }
+        if(is_array($data)){
+           $data = $data[0];
+        }
+      return $data;
+     }
+
+   public function findAll($orderby = 'desc')
+     {
+        $query = "select * from $this->table order by id $orderby";
+        $data = $this->query($query);
+         
+       // run functions after select
+       if(is_array($data)){
+            if(property_exists($this,'afterSelect'))
+            {         
+               foreach($this->afterSelect as $func )
+               {
+                  $data = $this->$func($data);
+               }
+            }
+      }
+       return $data;
      }
      
      public function insert($data)
@@ -64,9 +110,8 @@ class Model extends Database{
 
      public function update($id,$data)
      {
-            
 
-           $stre = "";
+           $str = "";
             foreach($data as $key => $value){
                $str .= $key."=:". $key.",";
             }
