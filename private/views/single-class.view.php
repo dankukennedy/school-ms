@@ -37,7 +37,7 @@
              switch ($page_tab){
                case 'lecturers':
                   //
-                  $this->view('class-tab-lecturers');
+                  $this->view('class-tab-lecturers',['row'=>$row]);
                   break;
                   
                case 'students':
@@ -48,6 +48,21 @@
                case 'tests':
                   //
                   $this->view('class-tab-tests');
+                  break;
+               
+               case 'lecturer-add':
+                  //
+                  $this->view('class-tab-lecturers-add');
+                  break;
+               
+               case 'students-add':
+                  //
+                  $this->view('class-tab-students-add');
+                  break;
+               
+               case 'tests-add':
+                  //
+                  $this->view('class-tab-tests-add');
                   break;
                
                default:

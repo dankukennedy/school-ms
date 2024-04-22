@@ -8,7 +8,7 @@
                 <input type="text" class="form-control" placeholder="Search" aria-describedy="basic-addon1">                 
         </div>
     </form>
-        <a href="<?=ROOT?>/signup">
+        <a href="<?=ROOT?>/single_class/<?=$row->class_id?>?tab=lecturer-add">
         <button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add Lecturer</button>
         </a>
  </nav> 
