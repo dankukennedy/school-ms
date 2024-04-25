@@ -23,8 +23,8 @@
 </form>
 <br>
 
+   <form method ="post"> 
 <div class="card-group justify-content-center">
-   <form method ="post">  
 
       <?php if(isset($results) && $results):?>
       
@@ -38,5 +38,6 @@
             <center><hr><h4> No result ware found <h4> </center>       
           <?php endif; ?>
         <?php endif; ?>
-  <form>
+
 </div> 
+ <form>
