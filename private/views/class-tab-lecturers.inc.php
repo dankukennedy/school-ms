@@ -8,8 +8,29 @@
                 <input type="text" class="form-control" placeholder="Search" aria-describedy="basic-addon1">                 
         </div>
     </form>
-        <a href="<?=ROOT?>/single_class/<?=$row->class_id?>?tab=lecturer-add">
-        <button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add Lecturer</button>
+    <div>
+        <a href="<?=ROOT?>/single_class/lectureradd/<?=$row->class_id?>?select=true">
+        <button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add New</button>
         </a>
+        
+        <a href="<?=ROOT?>/single_class/lecturerremove/<?=$row->class_id?>?select=true">
+        <button class="btn btn-sm btn-danger"><i class="fa fa-minus"></i>Remove </button>
+        </a>
+ </div>
  </nav> 
+    
+ <div class = "card-group justify-content-center">
+    <?php if(is_array($lecturers)):?>
+        <?php foreach($lecturers as $lecturer):?>
+
+         <?php 
+          $row = $lecturer->user;
+          include(views_path('user')); 
+       
+        ?>
+     <?php endforeach;?>
+   <?php else:?>
+    <center><h4>No Lectures were found in this class</h4></center>
+   <?php endif;?>
+</div>
 

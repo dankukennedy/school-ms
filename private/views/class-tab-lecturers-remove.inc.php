@@ -1,5 +1,5 @@
 <form method="post" class="form mx-auto" style="width:100%; max-width:400px;">
-    <br><h4>Add Leacture</h4>
+    <br><h4>Remove Leacture</h4>
 
     <?php  if(count($errors) > 0):?>
         <div class="alert alert-warning alert-dismissible fade show p-1" role ="alert">

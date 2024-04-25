@@ -14,13 +14,14 @@ class Model extends Database{
            $this->table = strtolower($this::class) . "s";  
         }
    }
-   public function where($column,$value)
+   public function where($column,$value,$orderby = 'desc')
      {
         $column = addslashes($column);
-        $query = "select * from $this->table where $column = :value";
+        $query = "select * from $this->table where $column = :value order by id $orderby";
         $data = $this->query($query,[
             'value'=>$value
         ]);
+
          // run functions after select
        if(is_array($data)){
          if(property_exists($this,'afterSelect'))
@@ -30,14 +31,14 @@ class Model extends Database{
                $data = $this->$func($data);
             }
          }
-       }
-    return $data;
+       } 
+          return $data;
      } 
 
-     public function first($column,$value)
+     public function first($column,$value,$orderby = 'desc')
      {
         $column = addslashes($column);
-        $query = "select * from $this->table where $column = :value";
+        $query = "select * from $this->table where $column = :value order by id $orderby";
         $data = $this->query($query,[
             'value'=>$value
         ]);

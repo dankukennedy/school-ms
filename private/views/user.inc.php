@@ -10,5 +10,9 @@
             <h5 class="card-title"><?=$row->firstname?> <?=$row->lastname?></h5>
             <p class="card-text">Rank: <?= str_replace("_"," ",$row->rank)?></p>
         <a href="<?=ROOT?>/profile/<?=$row->user_id?>" class="btn btn-primary">Profile</a>
-        </div>
+         
+        <?php if(isset($_GET['select'])):?>
+        <button name="selected" value="<?=$row->user_id?>" class="float-end btn btn-danger">Select</button>
+         <?php endif;?>
+    </div>
     </div>      
